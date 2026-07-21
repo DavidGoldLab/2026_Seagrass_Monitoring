@@ -425,7 +425,8 @@ PCA_totLip_plot <- ggplot(PCA_totLip_df_total, aes(x = PC2, y = PC3, fill = Trea
   guides(size = FALSE, fill = guide_legend(override.aes = list(size = 3))) + 
   ggtitle("Principle Components Analysis - total lipids")
 PCA_totLip_plot
-ggsave("PCA_total lipids.png", plot = bar_proxy_plots, width = 6, height = 6, units = c("in"))
+ggsave("PCA_total lipids.png", plot = PCA_totLip_plot, width = 6, height = 6, units = c("in"))
+# Supplementary Figure 1
 
 
 
