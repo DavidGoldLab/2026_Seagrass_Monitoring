@@ -423,10 +423,8 @@ PCA_totLip_plot <- ggplot(PCA_totLip_df_total, aes(x = PC2, y = PC3, fill = Trea
   geom_point(colour = "black", shape = 21, size = 2.5) + 
   xlab(paste0("PC2", percentage[2])) + ylab(paste0("PC3", percentage[3])) + 
   guides(size = FALSE, fill = guide_legend(override.aes = list(size = 3))) + 
-  ggtitle("Principle Components Analysis - total lipids")
+  ggtitle("Supplemental Figure 1: PCA of total lipids")
 PCA_totLip_plot
-ggsave("PCA_total lipids.png", plot = PCA_totLip_plot, width = 6, height = 6, units = c("in"))
-# Supplementary Figure 1
-
+ggsave("Supp Figure 1.pdf", plot = PCA_totLip_plot, width = 6, height = 6, units = c("in"))
 
 
