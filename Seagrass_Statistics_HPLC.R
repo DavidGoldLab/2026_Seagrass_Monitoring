@@ -11,9 +11,8 @@ library(tidyverse)
 library(vegan)
 
 # Data wrangling ------------------------------------------------------------------------------------
-setwd("/Users/mulligan3/Desktop/Bilinski/DATA/HPLC_analysis/")
 
-OriginalDB <- read.csv("FA_PCA.csv") #Supplemental_File_2_FFA_data.csv
+OriginalDB <- read.csv("Supplemental_File_2_FFA_data.csv")
 OriginalDB <- OriginalDB[-c(1,2,27),]
 OriginalDB <- OriginalDB[!(OriginalDB$Species %in% "Unknown bird"),]
 OriginalDB <- OriginalDB[!(OriginalDB$Species %in% "Blank"),]
@@ -389,7 +388,7 @@ summary(terr_vs_mar_aov)
 
 # PCA of all lipids --------------------------------------------------------------------------------
 
-FullLipidsDB <- read.csv("lipids_PCA.csv") # Supplemental_File_1_HPLC_data.csv
+FullLipidsDB <- read.csv("Supplemental_File_1_HPLC_data.csv") 
 str(FullLipidsDB)
 
 FullLipidsDB <- FullLipidsDB[-c(1,2,27),]
