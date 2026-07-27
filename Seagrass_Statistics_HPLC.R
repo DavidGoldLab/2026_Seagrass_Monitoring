@@ -111,14 +111,15 @@ perTotPCA_plot_Treatment <- ggplot(perTotPCA_df_total, aes(x = PC1, y = PC2, fil
   geom_point(colour = "black", shape = 21, size = 4) + 
   geom_label_repel(dat = Treatment_label_PCA, fontface = "bold", size = 3, color = "white",
                    segment.color = NA, aes(label = Treatment,
-                                           x = label_X, y = label_Y, fill = Treatment)) +
+                                           x = label_X, y = label_Y, fill = Treatment, 
+                                           family = "Times")) +
   xlab(paste0("PC1", percentage[1])) + ylab(paste0("PC2", percentage[2])) +
   theme_linedraw() + 
   ggtitle(" ") + 
   theme(legend.position = "none", legend.title = element_blank(), 
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), 
-        text = element_text(family = "Times New Roman", size = 12))
+        text = element_text(family = "Times", size = 12))
 perTotPCA_plot_Treatment
 
 perTotPCA_plot_Species <- ggplot(perTotPCA_df_total, aes(x = PC3, y = PC2, fill = Species_simple, group = Species_simple)) + 
@@ -128,14 +129,15 @@ perTotPCA_plot_Species <- ggplot(perTotPCA_df_total, aes(x = PC3, y = PC2, fill 
   geom_point(colour = "black", shape = 21, size = 4) + 
   geom_label_repel(dat = Species_label_PCA, fontface = "bold", size = 3, color = "white",
                    segment.color = NA, aes(label = Species_simple,
-                   x = label_X, y = label_Y, fill = Species_simple)) +
+                   x = label_X, y = label_Y, fill = Species_simple, 
+                   family = "Times")) +
   ylab(paste0("PC2", percentage[2])) + xlab(paste0("PC3", percentage[3])) + 
   theme_linedraw() + 
   ggtitle(" ") + 
   theme(legend.position = "none", legend.title = element_blank(), 
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), 
-        text = element_text(family = "Times New Roman", size = 12))
+        text = element_text(family = "Times", size = 12))
 perTotPCA_plot_Species
 
 Eigen_eco <- fviz_pca_biplot(myperTotPCA, axes = c(1, 2), label = "var", 
@@ -147,7 +149,7 @@ Eigen_eco <- fviz_pca_biplot(myperTotPCA, axes = c(1, 2), label = "var",
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(), 
-  text = element_text(family = "Times New Roman", size = 12)) + 
+  text = element_text(family = "Times", size = 12)) + 
   labs(title ="", x = paste0("PC1", percentage[1]), y = paste0("PC2", percentage[2]))
 Eigen_eco
 
@@ -159,7 +161,7 @@ Eigen_birds <- fviz_pca_biplot(myperTotPCA, axes = c(3, 2), label = "var", col.v
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(), 
-    text = element_text(family = "Times New Roman", size = 12)) + 
+    text = element_text(family = "Times", size = 12)) + 
   labs(title ="", x = paste0("PC3", percentage[3]), y = paste0("PC2", percentage[2]))
 Eigen_birds
 
@@ -175,9 +177,10 @@ ggsave("PCA_bird_plots.png", plot = PCA_bird_plots, width = 10, height = 5, unit
 
 PCA_all_plots <- plot_grid(perTotPCA_plot_Treatment, Eigen_eco, 
                            perTotPCA_plot_Species, Eigen_birds, 
-                           nrow =2, labels = c("A", "B", "C", "D"))
+                           nrow = 2, labels = c("A", "B", "C", "D"))
 PCA_all_plots
 ggsave("PCA_all_plots.png", plot = PCA_all_plots, width = 10, height = 10, units = c("in"))
+ggsave("Figure_3.pdf", plot = PCA_all_plots, width = 10, height = 10, units = c("in"))
 
 
 # Linegraph of FAs per bird ---------------------------------------------------------------------------
@@ -209,14 +212,15 @@ FA_linegraph <- ggplot(mean_data, aes(x = variable,
         panel.grid.minor = element_blank(),
         panel.border = element_blank(),
         panel.background = element_blank()) + 
-  theme(text = element_text(family = "Times New Roman", size = 12)) + 
+  theme(text = element_text(family = "Times", size = 12)) + 
   guides(shape = FALSE, size = FALSE, color = guide_legend(title = "Species"), 
          fill = guide_legend(override.aes = list(size = 3))) + 
   ggtitle("FFA values averaged per species")
 FA_linegraph
 ggsave("FA_linegraph.png", plot = FA_linegraph, width = 8.5, height = 3,
        units = c("in"), dpi = 500)
-
+ggsave("Figure_2.pdf", plot = FA_linegraph, width = 8.5, height = 3,
+       units = c("in"), dpi = 500)
 
 
 
@@ -253,8 +257,9 @@ DHA_LCFA_scatterplot <- ggplot(temp_norm_perTot, aes(x = (X24.0  + X24.1n.9 + X2
   geom_point(colour = "black", shape = 21, size = 5) + 
   geom_label_repel(dat = scatterplot_label, fontface = "bold", size = 3, color = "white",
                    segment.color = NA, aes(label = Treatment,
-                   x = label_X, y = label_Y, fill = Treatment)) +
-  theme(text = element_text(family = "Times New Roman", size = 12)) + 
+                   x = label_X, y = label_Y, fill = Treatment, 
+                   family = "Times")) +
+  theme(text = element_text(family = "Times", size = 12)) + 
   xlab("LCFAs (% total FFA)") + ylab("DHA (% total FFA)") + 
   theme(legend.position = "none") + 
   ggtitle("")
@@ -287,7 +292,7 @@ DHA_LCFA_barplot <- ggplot(temp_norm_perTot, aes(x = Treatment,
   scale_x_discrete(guide = guide_axis(angle = 45)) +
   ylab("DHA / DHA + LCFA") + 
   theme_bw() +
-  theme(text = element_text(family = "Times New Roman", size = 12)) + 
+  theme(text = element_text(family = "Times", size = 14)) + 
   guides(alpha = "none", fill = "none", colour = "none") 
 DHA_LCFA_barplot
 ggsave("DHA_LCFA_barplot.png", plot = DHA_LCFA_barplot, width = 6, height = 6,
@@ -312,14 +317,15 @@ DHA_LCFA_barplot_species <- ggplot(filter(temp_norm_perTot, Facet == "Avian feca
   scale_x_discrete(guide = guide_axis(angle = 45)) +
   ylab("DHA / DHA + LCFA") + 
   theme_bw() +
-  theme(text = element_text(family = "Times New Roman", size = 12)) + 
+  theme(text = element_text(family = "Times", size = 14)) + 
   guides(alpha = "none", fill = "none", colour = "none") 
 DHA_LCFA_barplot_species
 
 bar_proxy_plots <- plot_grid(DHA_LCFA_barplot, DHA_LCFA_barplot_species,
                             nrow = 2 , labels = c("A", "B"))
 bar_proxy_plots
-ggsave("bar_proxy_plots.png", plot = bar_proxy_plots, width = 4, height = 8, units = c("in"))
+ggsave("bar_proxy_plots.png", plot = bar_proxy_plots, width = 6, height = 8, units = c("in"))
+ggsave("Figure_4.pdf", plot = bar_proxy_plots, width = 6, height = 8, units = c("in"))
 
 
 
@@ -387,7 +393,7 @@ summary(terr_vs_mar_aov)
 
 # PCA of all lipids --------------------------------------------------------------------------------
 
-FullLipidsDB <- read.csv("Supplemental_File_1_HPLC_data.csv") 
+FullLipidsDB <- read.csv("Supplemental_File_1_HPLC_data.csv")
 str(FullLipidsDB)
 
 FullLipidsDB <- FullLipidsDB[-c(1,2,27),]
@@ -419,10 +425,17 @@ Species_Hull_PCA <- PCA_totLip_df_total %>% group_by(Species) %>% slice(c(chull(
 PCA_totLip_plot <- ggplot(PCA_totLip_df_total, aes(x = PC2, y = PC3, fill = Treatment, group = Treatment)) + 
   geom_vline(colour = "#000000", xintercept = 0) + 
   geom_hline(colour = "#000000", yintercept = 0) + 
-  geom_polygon(data = Treatment_Hull_PCA, aes(colour = Treatment), alpha = 0.3) +
+  geom_polygon(data = Treatment_Hull_PCA, aes(colour = Treatment), alpha = 0.3) + 
   geom_point(colour = "black", shape = 21, size = 2.5) + 
+  scale_fill_manual(values = c(
+    "Mudflat" = "#786956", 
+    "Healthy meadow" = "#12a138")) + 
+  scale_colour_manual(values = c(
+    "Mudflat" = "#786956", 
+    "Healthy meadow" = "#12a138")) + 
   xlab(paste0("PC2", percentage[2])) + ylab(paste0("PC3", percentage[3])) + 
   guides(size = FALSE, fill = guide_legend(override.aes = list(size = 3))) + 
+  theme(text = element_text(family = "Times", size = 12)) + 
   ggtitle("Supplemental Figure 1: PCA of total lipids")
 PCA_totLip_plot
 ggsave("Supp Figure 1.pdf", plot = PCA_totLip_plot, width = 6, height = 6, units = c("in"))
