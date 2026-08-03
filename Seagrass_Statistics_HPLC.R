@@ -116,10 +116,11 @@ perTotPCA_plot_Treatment <- ggplot(perTotPCA_df_total, aes(x = PC1, y = PC2, fil
   xlab(paste0("PC1", percentage[1])) + ylab(paste0("PC2", percentage[2])) +
   theme_linedraw() + 
   ggtitle(" ") + 
+  xlim(-50, 60) + ylim(-30, 50) + 
   theme(legend.position = "none", legend.title = element_blank(), 
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), 
-        text = element_text(family = "Times", size = 12))
+        text = element_text(family = "Times", size = 15))
 perTotPCA_plot_Treatment
 
 perTotPCA_plot_Species <- ggplot(perTotPCA_df_total, aes(x = PC3, y = PC2, fill = Species_simple, group = Species_simple)) + 
@@ -137,43 +138,32 @@ perTotPCA_plot_Species <- ggplot(perTotPCA_df_total, aes(x = PC3, y = PC2, fill 
   theme(legend.position = "none", legend.title = element_blank(), 
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), 
-        text = element_text(family = "Times", size = 12))
+        text = element_text(family = "Times", size = 15))
 perTotPCA_plot_Species
 
 Eigen_eco <- fviz_pca_biplot(myperTotPCA, axes = c(1, 2), label = "var", 
                              col.var = "purple", col.ind = "grey", 
                              labelsize = 3, repel = TRUE, 
-                             select.var = list(cos2 = 0.6), 
-                             select.ind = list(cos2 = 0.6)) + 
+                             select.var = list(cos2 = 0.6)) + 
   theme_bw() + 
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(), 
-  text = element_text(family = "Times", size = 12)) + 
+  text = element_text(family = "Times", size = 15)) + 
+  xlim(-50, 60) + ylim(-30, 50) + 
   labs(title ="", x = paste0("PC1", percentage[1]), y = paste0("PC2", percentage[2]))
 Eigen_eco
 
 Eigen_birds <- fviz_pca_biplot(myperTotPCA, axes = c(3, 2), label = "var", col.var="purple", col.ind="grey", 
                 labelsize = 3, repel = TRUE, 
-                select.var = list(cos2 = 0.6), 
-                select.ind = list(cos2 = 0.6)) + 
+                select.var = list(cos2 = 0.6)) + 
   theme_bw() + 
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(), 
-    text = element_text(family = "Times", size = 12)) + 
+    text = element_text(family = "Times", size = 15)) + 
   labs(title ="", x = paste0("PC3", percentage[3]), y = paste0("PC2", percentage[2]))
 Eigen_birds
-
-PCA_eco_plots <- plot_grid(perTotPCA_plot_Treatment, Eigen_eco,
-          nrow =1, labels = c("A", "B"))
-PCA_eco_plots
-ggsave("PCA_eco_plots.png", plot = PCA_eco_plots, width = 10, height = 5, units = c("in"))
-
-PCA_bird_plots <- plot_grid(perTotPCA_plot_Species, Eigen_birds,
-          nrow =1, labels = c("A", "B"))
-PCA_bird_plots
-ggsave("PCA_bird_plots.png", plot = PCA_bird_plots, width = 10, height = 5, units = c("in"))
 
 PCA_all_plots <- plot_grid(perTotPCA_plot_Treatment, Eigen_eco, 
                            perTotPCA_plot_Species, Eigen_birds, 
@@ -292,7 +282,7 @@ DHA_LCFA_barplot <- ggplot(temp_norm_perTot, aes(x = Treatment,
   scale_x_discrete(guide = guide_axis(angle = 45)) +
   ylab("DHA / DHA + LCFA") + 
   theme_bw() +
-  theme(text = element_text(family = "Times", size = 14)) + 
+  theme(text = element_text(family = "Times", size = 16)) + 
   guides(alpha = "none", fill = "none", colour = "none") 
 DHA_LCFA_barplot
 ggsave("DHA_LCFA_barplot.png", plot = DHA_LCFA_barplot, width = 6, height = 6,
@@ -317,15 +307,15 @@ DHA_LCFA_barplot_species <- ggplot(filter(temp_norm_perTot, Facet == "Avian feca
   scale_x_discrete(guide = guide_axis(angle = 45)) +
   ylab("DHA / DHA + LCFA") + 
   theme_bw() +
-  theme(text = element_text(family = "Times", size = 14)) + 
+  theme(text = element_text(family = "Times", size = 16)) + 
   guides(alpha = "none", fill = "none", colour = "none") 
 DHA_LCFA_barplot_species
 
 bar_proxy_plots <- plot_grid(DHA_LCFA_barplot, DHA_LCFA_barplot_species,
                             nrow = 2 , labels = c("A", "B"))
 bar_proxy_plots
-ggsave("bar_proxy_plots.png", plot = bar_proxy_plots, width = 6, height = 8, units = c("in"))
-ggsave("Figure_4.pdf", plot = bar_proxy_plots, width = 6, height = 8, units = c("in"))
+ggsave("bar_proxy_plots.png", plot = bar_proxy_plots, width = 5, height = 8, units = c("in"))
+ggsave("Figure_4.pdf", plot = bar_proxy_plots, width = 5, height = 8, units = c("in"))
 
 
 
